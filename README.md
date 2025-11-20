@@ -7,6 +7,12 @@
 
 A powerful web application for generating real-time subtitles using **ElevenLabs Scribe-v2** realtime speech-to-text API. Perfect for live streaming, recording, and content creation with OBS Studio integration.
 
+## 🎥 Demo Video
+
+[![Demo Video](https://img.youtube.com/vi/kDDcDjXuNPo/maxresdefault.jpg)](https://youtu.be/kDDcDjXuNPo)
+
+**Watch the demo video** to see real-time subtitles in action with OBS Studio integration!
+
 ## ✨ Features
 
 - 🎤 **Real-time Speech-to-Text** - Live transcription using ElevenLabs Scribe-v2 API
