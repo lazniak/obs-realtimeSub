@@ -3,6 +3,7 @@
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-14.2-black)](https://nextjs.org/)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support-yellow.svg)](https://buymeacoffee.com/eyb8tkx3to)
 
 A powerful web application for generating real-time subtitles using **ElevenLabs Scribe-v2** realtime speech-to-text API. Perfect for live streaming, recording, and content creation with OBS Studio integration.
 
@@ -74,8 +75,9 @@ A powerful web application for generating real-time subtitles using **ElevenLabs
    - Speak into your microphone - subtitles appear in real-time
 
 3. **Display Subtitles**
-   - Open the Display Panel (`/display`) in a separate window or OBS Browser Source
-   - Subtitles update automatically via WebSocket
+   - **Option A**: Open the Display Panel (`/display`) in a separate browser window
+   - **Option B**: Add it as a Browser Source in OBS (see [OBS Studio Integration](#obs-studio-integration) for detailed instructions)
+   - Subtitles update automatically via WebSocket in real-time
 
 4. **Export SRT File**
    - After recording, click "Export SRT" to download subtitle file
@@ -83,22 +85,75 @@ A powerful web application for generating real-time subtitles using **ElevenLabs
 
 ### OBS Studio Integration
 
-1. **Enable OBS WebSocket Server**
-   - Open OBS Studio
-   - Go to `Tools > WebSocket Server Settings`
-   - Enable WebSocket server (default port: 4455)
-   - Set password if desired
+#### Step 1: Enable OBS WebSocket Server
 
-2. **Add Browser Source**
-   - In OBS, add a new Browser Source
-   - Set URL to: `http://localhost:4639/display`
-   - Configure width/height as needed
-   - Enable "Shutdown source when not visible" for better performance
+1. Open **OBS Studio**
+2. Go to **Tools** → **WebSocket Server Settings**
+3. Check **"Enable WebSocket server"**
+4. Note the port (default: **4455**)
+5. Optionally set a password for security
+6. Click **OK** to save
 
-3. **Synchronized Recording**
-   - Check "Also record in OBS" before starting recording
-   - Both transcription and OBS recording start simultaneously
-   - SRT timestamps are synchronized with OBS video recording
+> **Note**: The WebSocket server is required for synchronized recording. If you only need to display subtitles, you can skip this step.
+
+#### Step 2: Add Display Page as Browser Source in OBS
+
+Follow these steps to add the subtitle display to your OBS scene:
+
+1. **Make sure the application is running**
+   - Start the development server: `npm run dev`
+   - Verify the display page is accessible at `http://localhost:4639/display`
+
+2. **Add Browser Source in OBS**
+   - In OBS Studio, right-click in the **Sources** panel
+   - Select **Add** → **Browser Source** (or **Browser**)
+   - Give it a name (e.g., "Subtitles" or "Live Subtitles")
+   - Click **OK**
+
+3. **Configure Browser Source**
+   - In the Browser Source properties window:
+     - **URL**: Enter `http://localhost:4639/display`
+     - **Width**: Set to match your canvas width (e.g., `1920` for 1080p)
+     - **Height**: Set to match your canvas height (e.g., `1080` for 1080p)
+     - ✅ Check **"Shutdown source when not visible"** (improves performance)
+     - ✅ Check **"Refresh browser when scene becomes active"** (optional, ensures fresh connection)
+   - Click **OK**
+
+4. **Position and Style**
+   - The subtitles will appear according to your settings from the `/rec` panel
+   - You can adjust the position in OBS by moving the Browser Source in the preview
+   - The background is transparent by default, so subtitles will overlay your content
+
+5. **Test the Connection**
+   - Open the `/rec` panel in your browser
+   - Start recording and speak into your microphone
+   - You should see subtitles appear in OBS in real-time
+
+> **Tip**: If subtitles don't appear, check that:
+> - The application server is running (`npm run dev`)
+> - The URL in Browser Source is correct: `http://localhost:4639/display`
+> - You've started recording in the `/rec` panel
+> - Your microphone permissions are granted
+
+#### Step 3: Synchronized Recording (Optional)
+
+To synchronize OBS recording with transcription:
+
+1. **Before starting recording in `/rec` panel:**
+   - Check the **"Also record in OBS"** checkbox
+   - This ensures both transcription and OBS video recording start simultaneously
+
+2. **Start Recording**
+   - Click **"Start Recording"** in the `/rec` panel
+   - OBS recording will start automatically (if checkbox is enabled)
+   - Both transcription and video recording are now synchronized
+
+3. **Stop Recording**
+   - Click **"Stop"** in the `/rec` panel
+   - OBS recording will stop automatically
+   - Export your SRT file - timestamps will be perfectly aligned with your OBS video
+
+> **Important**: The SRT file timestamps are calculated based on actual speech timing, not display timing. This ensures perfect synchronization with your OBS video recording during editing.
 
 ## 🎨 Customization
 
@@ -202,6 +257,14 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 ## 📞 Support
 
 For issues, questions, or feature requests, please open an issue on [GitHub](https://github.com/lazniak/obs-realtimeSub/issues).
+
+### ☕ Buy Me a Coffee
+
+If you find this project useful and would like to support its development, consider buying me a coffee:
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/eyb8tkx3to)
+
+Your support helps me continue improving this project and adding new features!
 
 ---
 
