@@ -9,7 +9,7 @@ A powerful web application for generating real-time subtitles using **ElevenLabs
 
 ## 🎥 Demo Video
 
-[![Demo Video](https://img.youtube.com/vi/kDDcDjXuNPo/maxresdefault.jpg)](https://youtu.be/kDDcDjXuNPo)
+[![Demo Video](https://img.youtube.com/vi/kDDcDjXuNPo/maxresdefault.jpg)](https://youtu.be/EsMbYrtGfOY)
 
 **Watch the demo video** to see real-time subtitles in action with OBS Studio integration!
 
